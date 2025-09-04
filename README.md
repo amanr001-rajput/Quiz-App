@@ -154,3 +154,7 @@ If someone visits `/results` directly without quiz state, they’ll see a simple
 ## 🔗 Live Demo
 
 [Quiz App on Vercel](https://quiz-app-three-psi-93.vercel.app)
+
+## 📄 Documentation
+
+- [Architecture And Design (2 Page)](./Architecture_And_Design.pdf)

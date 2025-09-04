@@ -2,31 +2,33 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import rawQuestions from "../data/questions.json";
 
+// Main quiz component that handles the entire quiz flow, including question navigation,
+// answer selection, progress tracking, and submission
 export default function QuizPage() {
-  // --- State ---
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedByIndex, setSelectedByIndex] = useState([]);
-  const [isBusy, setIsBusy] = useState(false);
+  // Core state management for quiz functionality
+  const [questions, setQuestions] = useState([]); // Stores all quiz questions
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracks current question index
+  const [selectedByIndex, setSelectedByIndex] = useState([]); // Stores user's answers
+  const [isBusy, setIsBusy] = useState(false); // Prevents rapid-fire navigation
 
   const navigate = useNavigate();
-  const questionRef = useRef(null);
+  const questionRef = useRef(null); // Reference for accessibility focus management
 
-  // --- Load questions once ---
+  // Initialize quiz by loading questions and setting up initial state
   useEffect(() => {
     setQuestions(rawQuestions);
     setSelectedByIndex(Array(rawQuestions.length).fill(null));
     setCurrentIndex(0);
   }, []);
 
-  // --- Focus on question change ---
+  // Automatically focus on question container when navigating between questions
   useEffect(() => {
     if (questionRef.current) {
       questionRef.current.focus();
     }
   }, [currentIndex]);
 
-  // --- Derived values ---
+  // Calculate important derived values for quiz state
   const total = questions.length || 0;
   const currentQ = useMemo(
     () => (total ? questions[currentIndex] : null),
@@ -34,17 +36,21 @@ export default function QuizPage() {
   );
   const selected = selectedByIndex?.[currentIndex] ?? null;
 
+  // Navigation boundary checks
   const atFirst = currentIndex === 0;
   const atLast = currentIndex === total - 1;
 
+  // Button enable/disable logic
   const canNext = selected != null && !atLast;
   const canSubmit = selected != null && atLast;
 
-  // progress bar
+  // Progress tracking calculations
   const answeredCount = selectedByIndex.filter((v) => v != null).length;
   const progressPct = total ? Math.round((answeredCount / total) * 100) : 0;
 
-  // --- Handlers ---
+  // Event Handlers
+
+  // Handles user selecting an answer for current question
   const handleSelect = (optIndex) => {
     setSelectedByIndex((prev) => {
       const copy = [...prev];
@@ -53,8 +59,10 @@ export default function QuizPage() {
     });
   };
 
+  // Anti-spam delay for navigation actions
   const guardDelay = 220;
 
+  // Navigate to previous question with smooth scroll
   const handlePrev = () => {
     if (isBusy || atFirst) return;
     setIsBusy(true);
@@ -63,6 +71,7 @@ export default function QuizPage() {
     setTimeout(() => setIsBusy(false), guardDelay);
   };
 
+  // Navigate to next question with smooth scroll
   const handleNext = () => {
     if (isBusy) return;
     if (selectedByIndex[currentIndex] == null) return;
@@ -73,6 +82,7 @@ export default function QuizPage() {
     setTimeout(() => setIsBusy(false), guardDelay);
   };
 
+  // Calculate final score and navigate to results page
   const handleSubmit = () => {
     if (isBusy) return;
     if (!total) return;
@@ -99,11 +109,10 @@ export default function QuizPage() {
     setTimeout(() => setIsBusy(false), guardDelay);
   };
 
-  // --- Render ---
   return (
     <div className="container">
       <div className="card">
-        {/* Header */}
+        {/* Quiz header showing current question number */}
         <div className="space-between" style={{ marginBottom: 12 }}>
           <h2 style={{ margin: 0 }}>Quiz</h2>
           <span className="muted">
@@ -113,7 +122,7 @@ export default function QuizPage() {
           </span>
         </div>
 
-        {/* Progress */}
+        {/* Visual progress indicator */}
         <div className="progress" aria-label={`Progress: ${progressPct}%`}>
           <div className="progress__track">
             <div
@@ -126,7 +135,7 @@ export default function QuizPage() {
           </span>
         </div>
 
-        {/* Body */}
+        {/* Main question display area with accessibility support */}
         <div
           ref={questionRef}
           tabIndex={-1}
@@ -170,7 +179,7 @@ export default function QuizPage() {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Navigation buttons with appropriate disable states */}
         <div className="row" style={{ marginTop: 16 }}>
           <button
             className="btn secondary"
