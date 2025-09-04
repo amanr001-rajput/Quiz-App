@@ -153,4 +153,4 @@ If someone visits `/results` directly without quiz state, they’ll see a simple
 
 ## 🔗 Live Demo
 
-[Quiz App on Vercel](https://your-vercel-link.vercel.app)
+[Quiz App on Vercel](quiz-e8xuxk4cs-aman-rajputs-projects-2d3fe271.vercel.app)
