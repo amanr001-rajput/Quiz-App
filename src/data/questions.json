@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "question": "Which HTML tag is used to define an unordered list?",
+    "options": ["<ol>", "<ul>", "<li>", "<list>"],
+    "correctIndex": 1,
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "Which of the following is NOT a JavaScript data type?",
+    "options": ["Number", "Boolean", "Character", "Undefined"],
+    "correctIndex": 2,
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "question": "In CSS, which property controls the text size?",
+    "options": ["font-weight", "font-size", "text-style", "font-style"],
+    "correctIndex": 1,
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "question": "Which array method creates a new array with elements that pass a test?",
+    "options": ["map()", "forEach()", "filter()", "reduce()"],
+    "correctIndex": 2,
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "question": "What does React's useState hook return?",
+    "options": [
+      "A state value and a function to update it",
+      "Only a state value",
+      "Only a function",
+      "A reducer and a dispatch"
+    ],
+    "correctIndex": 0,
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "question": "Which HTTP method is idempotent by definition?",
+    "options": ["POST", "PATCH", "PUT", "DELETE"],
+    "correctIndex": 2,
+    "difficulty": "medium"
+  },
+  {
+    "id": 7,
+    "question": "What does the CSS property 'box-sizing: border-box' do?",
+    "options": [
+      "Excludes padding/border from total size",
+      "Includes padding/border in total size",
+      "Adds margin to total size",
+      "Ignores border completely"
+    ],
+    "correctIndex": 1,
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "question": "In React, keys are used primarily to:",
+    "options": [
+      "Style components",
+      "Identify elements in lists for efficient re-rendering",
+      "Bind event handlers",
+      "Initialize state"
+    ],
+    "correctIndex": 1,
+    "difficulty": "easy"
+  }
+]
