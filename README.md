@@ -151,4 +151,6 @@ If someone visits `/results` directly without quiz state, they’ll see a simple
 - Store high scores in localStorage
 - Subtle animations with Framer Motion
 
----
+## 🔗 Live Demo
+
+[Quiz App on Vercel](https://your-vercel-link.vercel.app)
